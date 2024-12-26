@@ -1,0 +1,141 @@
+:root {
+  --nav-bg: #2563eb;
+  --nav-hover: #1e40af;
+  --content-bg: #f8fafc;
+  --text-light: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background: var(--content-bg);
+}
+
+/* Navigation Styles */
+.nav__cont {
+  width: 60px;
+  background: var(--nav-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+}
+
+.nav__cont:hover {
+  width: 200px;
+}
+
+.nav_w {
+  padding-top: 20px;
+  list-style: none;
+}
+
+.nav__items {
+  padding: 15px;
+  padding-top: 40px;
+  margin: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.nav__items:hover {
+  background: var(--nav-hover);
+}
+
+.nav__items a {
+  color: var(--text-light);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+.nav__items svg {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  fill: currentColor;
+}
+
+/* Main Content Styles */
+.wrapper {
+  margin-left: 80px;
+  padding: 20px;
+  flex: 1;
+}
+
+main {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #1e293b;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #475569;
+}
+
+/* Dashboard Cards */
+.dashboard-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.info-card {
+  background: var(--content-bg);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.info-card h3 {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--nav-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav__cont {
+      width: 60px;
+  }
+
+  .nav__cont:hover {
+      width: 180px;
+  }
+
+  .wrapper {
+      margin-left: 60px;
+  }
+
+  .dashboard-content {
+      grid-template-columns: 1fr;
+  }
+}
