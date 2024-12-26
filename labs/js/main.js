@@ -1,260 +1,204 @@
-// Tasks management for labs.html
-let tasks = [];
-
-function loadTasks() {
-    const savedTasks = localStorage.getItem('labTasks');
-    if (savedTasks) {
-        tasks = JSON.parse(savedTasks);
-        renderTasks();
-    }
-}
-
-function saveTasks() {
-    localStorage.setItem('labTasks', JSON.stringify(tasks));
-}
-
-function createTask() {
-    const taskInput = document.getElementById('taskInput');
-    const task = taskInput.value.trim();
+// Storage utility functions with error handling
+const StorageUtil = {
+    setItem(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+            return true;
+        } catch (error) {
+            console.error('Storage error:', error);
+            return false;
+        }
+    },
     
-    if (task) {
-        tasks.push({ id: Date.now(), name: task });
-        taskInput.value = '';
-        saveTasks();
-        renderTasks();
+    getItem(key, defaultValue = null) {
+        try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : defaultValue;
+        } catch (error) {
+            console.error('Storage retrieval error:', error);
+            return defaultValue;
+        }
     }
-}
+};
 
-function renderTasks() {
-    const taskList = document.getElementById('taskList');
-    if (!taskList) return; // Only execute if on labs.html page
-
-    taskList.innerHTML = ''; 
-
-    tasks.forEach(task => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${task.name}</td>
-            <td>
-                <a href="view.html?id=${task.id}" class="btn btn-info btn-sm">View</a>
-                <button onclick="editTask(${task.id})" class="btn btn-warning btn-sm">Edit</button>
-                <button onclick="deleteTask(${task.id})" class="btn btn-danger btn-sm">Delete</button>
-            </td>`;
-        taskList.appendChild(tr);
-    });
-}
-
-function editTask(id) {
-    const task = tasks.find(t => t.id === id);
-    if (!task) return;
-
-    const newTaskName = prompt("Enter the new lab name:", task.name);
-    if (newTaskName && newTaskName.trim()) {
-        tasks = tasks.map(task => 
-            task.id === id ? { ...task, name: newTaskName.trim() } : task
-        );
-        saveTasks();
-        renderTasks();
+// Component validation
+const validateComponent = (component) => {
+    const errors = [];
+    if (!component.type?.trim()) errors.push('Type is required');
+    if (!Number.isInteger(component.quantity) || component.quantity < 0) {
+        errors.push('Quantity must be a positive number');
     }
-}
-
-function deleteTask(id) {
-    if (confirm('Are you sure you want to delete this lab?')) {
-        tasks = tasks.filter(task => task.id !== id);
-        saveTasks();
-        renderTasks();
+    if (!Number.isInteger(component.running) || component.running < 0) {
+        errors.push('Running count must be a positive number');
     }
-}
-
-// Components management for view.html
-let components = [];
-let currentComponentId = null;
-
-function getLabId() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id');
-}
-
-function loadComponents() {
-    const labId = getLabId();
-    if (!labId) return;
-
-    const savedComponents = localStorage.getItem(`lab_${labId}_components`);
-    if (savedComponents) {
-        components = JSON.parse(savedComponents);
-        renderComponents();
+    if (!Number.isInteger(component.damage) || component.damage < 0) {
+        errors.push('Damage count must be a positive number');
     }
-}
+    if (component.running + component.damage > component.quantity) {
+        errors.push('Running + damaged items cannot exceed total quantity');
+    }
+    return errors;
+};
 
-function saveComponents() {
-    const labId = getLabId();
-    if (!labId) return;
-    localStorage.setItem(`lab_${labId}_components`, JSON.stringify(components));
-}
+// Enhanced component management
+class ComponentManager {
+    constructor() {
+        this.components = [];
+        this.currentComponentId = null;
+    }
 
-function createComponent() {
-    const typeInput = document.getElementById('typeInput');
-    const quantityInput = document.getElementById('quantityInput');
-    const commentsInput = document.getElementById('commentsInput');
-    const runningInput = document.getElementById('runningInput');
-    const damageInput = document.getElementById('damageInput');
+    init() {
+        this.loadComponents();
+        this.setupEventListeners();
+    }
 
-    const type = typeInput.value.trim();
-    const quantity = parseInt(quantityInput.value) || 0;
-    const comments = commentsInput.value.trim();
-    const running = parseInt(runningInput.value) || 0;
-    const damage = parseInt(damageInput.value) || 0;
+    loadComponents() {
+        const labId = this.getLabId();
+        if (!labId) return;
+        
+        this.components = StorageUtil.getItem(`lab_${labId}_components`, []);
+        this.renderComponents();
+    }
 
-    if (type && quantity > 0) {
-        const newComponent = {
+    saveComponents() {
+        const labId = this.getLabId();
+        if (!labId) return;
+        
+        StorageUtil.setItem(`lab_${labId}_components`, this.components);
+    }
+
+    getLabId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
+    createComponent(formData) {
+        const component = {
             id: Date.now(),
-            type,
-            quantity,
-            comments,
-            running,
-            damage
+            type: formData.type.trim(),
+            quantity: parseInt(formData.quantity),
+            running: parseInt(formData.running),
+            damage: parseInt(formData.damage),
+            comments: formData.comments.trim()
         };
 
-        components.push(newComponent);
-        saveComponents();
-        renderComponents();
+        const errors = validateComponent(component);
+        if (errors.length > 0) {
+            throw new Error(errors.join('\n'));
+        }
 
-        // Clear form
-        typeInput.value = '';
-        quantityInput.value = '';
-        commentsInput.value = '';
-        runningInput.value = '';
-        damageInput.value = '';
-
-        // Close modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
-        modal.hide();
-    } else {
-        alert('Please fill in at least the type and quantity fields');
+        this.components.push(component);
+        this.saveComponents();
+        this.renderComponents();
     }
-}
 
-function renderComponents() {
-    const tbody = document.getElementById('componentsTableBody');
-    if (!tbody) return;
+    editComponent(id, formData) {
+        const component = this.components.find(c => c.id === id);
+        if (!component) throw new Error('Component not found');
 
-    tbody.innerHTML = '';
+        const updatedComponent = {
+            ...component,
+            ...formData,
+            type: formData.type.trim(),
+            quantity: parseInt(formData.quantity),
+            running: parseInt(formData.running),
+            damage: parseInt(formData.damage)
+        };
 
-    components.forEach((component, index) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${component.type}</td>
-            <td>${component.quantity}</td>
-            <td>${component.running}</td>
-            <td>${component.damage}</td>
-            <td>${component.comments || 'no comments'}</td>
-            <td>
-                <button class="btn btn-info btn-sm" onclick="openCommentModal(${component.id})">
-                    Add Comment
-                </button>
-            </td>
-            <td><button class="btn btn-warning btn-sm" onclick="editComponent(${component.id})">Edit</button></td>
-            <td><button class="btn btn-danger btn-sm" onclick="deleteComponent(${component.id})">Remove</button></td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
+        const errors = validateComponent(updatedComponent);
+        if (errors.length > 0) {
+            throw new Error(errors.join('\n'));
+        }
 
-function openCommentModal(componentId) {
-    currentComponentId = componentId;
-    const modal = new bootstrap.Modal(document.getElementById('modal'));
-    const commentInput = document.getElementById('commentInput');
-    commentInput.value = ''; // Clear previous comment
-    modal.show();
-}
+        this.components = this.components.map(c => 
+            c.id === id ? updatedComponent : c
+        );
+        
+        this.saveComponents();
+        this.renderComponents();
+    }
 
-function addComment() {
-    if (!currentComponentId) return;
+    setupEventListeners() {
+        // Create component form submission
+        const createForm = document.getElementById('createComponentForm');
+        if (createForm) {
+            createForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                try {
+                    const formData = new FormData(createForm);
+                    this.createComponent(Object.fromEntries(formData));
+                    bootstrap.Modal.getInstance(document.getElementById('createModal'))?.hide();
+                    createForm.reset();
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+        }
 
-    const commentInput = document.getElementById('commentInput');
-    const comment = commentInput.value.trim();
+        // Edit component form submission
+        const editForm = document.getElementById('editComponentForm');
+        if (editForm) {
+            editForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                try {
+                    const formData = new FormData(editForm);
+                    this.editComponent(this.currentComponentId, Object.fromEntries(formData));
+                    bootstrap.Modal.getInstance(document.getElementById('editModal'))?.hide();
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+        }
+    }
 
-    if (comment) {
-        components = components.map(component => {
-            if (component.id === currentComponentId) {
-                return { ...component, comments: comment };
-            }
-            return component;
+    renderComponents() {
+        const tbody = document.getElementById('componentsTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        this.components.forEach((component, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${this.escapeHtml(component.type)}</td>
+                <td>${component.quantity}</td>
+                <td>${component.running}</td>
+                <td>${component.damage}</td>
+                <td>${this.escapeHtml(component.comments || 'No comments')}</td>
+                <td>
+                    <button class="btn btn-info btn-sm" data-component-id="${component.id}" data-action="comment">
+                        Add Comment
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-component-id="${component.id}" data-action="edit">
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm" data-component-id="${component.id}" data-action="delete">
+                        Remove
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
         });
+    }
 
-        saveComponents();
-        renderComponents();
-
-        // Close modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('modal'));
-        modal.hide();
-        currentComponentId = null;
+    escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 }
 
-function editComponent(id) {
-    const component = components.find(c => c.id === id);
-    if (!component) return;
-
-    const newType = prompt('Enter new type:', component.type);
-    if (newType === null) return;
-
-    const newQuantity = parseInt(prompt('Enter new quantity:', component.quantity));
-    if (isNaN(newQuantity)) return;
-
-    const newRunning = parseInt(prompt('Enter new running count:', component.running));
-    if (isNaN(newRunning)) return;
-
-    const newDamage = parseInt(prompt('Enter new damage count:', component.damage));
-    if (isNaN(newDamage)) return;
-
-    components = components.map(c => {
-        if (c.id === id) {
-            return {
-                ...c,
-                type: newType.trim(),
-                quantity: newQuantity,
-                running: newRunning,
-                damage: newDamage
-            };
-        }
-        return c;
-    });
-
-    saveComponents();
-    renderComponents();
-}
-
-function deleteComponent(id) {
-    if (confirm('Are you sure you want to delete this component?')) {
-        components = components.filter(component => component.id !== id);
-        saveComponents();
-        renderComponents();
-    }
-}
-
-// Initialize page
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Load tasks if on labs.html
-    if (document.getElementById('taskList')) {
-        loadTasks();
-    }
-
-    // Load components if on view.html
     if (document.getElementById('componentsTableBody')) {
-        // Add event listener to create component button
-        const createButton = document.getElementById('createComponentBtn');
-        if (createButton) {
-            createButton.addEventListener('click', createComponent);
-        }
-
-        // Add event listener to add comment button
-        const addCommentBtn = document.getElementById('addCommentBtn');
-        if (addCommentBtn) {
-            addCommentBtn.addEventListener('click', addComment);
-        }
-
-        loadComponents();
+        const componentManager = new ComponentManager();
+        componentManager.init();
     }
 });

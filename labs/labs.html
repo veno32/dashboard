@@ -5,54 +5,118 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Labs Management</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="container mt-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
             Create New Lab
         </button>
         
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Create Modal -->
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Lab</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="taskInput" class="form-label">Lab Name:</label>
-                            <input type="text" class="form-control" id="taskInput" placeholder="Enter lab name">
+                    <form id="createComponentForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createModalLabel">New Component</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="createTask()" data-bs-dismiss="modal">Create</button>
-                    </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Type:</label>
+                                <input type="text" class="form-control" id="type" name="type" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity:</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="running" class="form-label">Running Count:</label>
+                                <input type="number" class="form-control" id="running" name="running" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="damage" class="form-label">Damage Count:</label>
+                                <input type="number" class="form-control" id="damage" name="damage" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comments" class="form-label">Comments:</label>
+                                <textarea class="form-control" id="comments" name="comments"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="editComponentForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Component</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Same fields as create modal -->
+                            <div class="mb-3">
+                                <label for="editType" class="form-label">Type:</label>
+                                <input type="text" class="form-control" id="editType" name="type" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editQuantity" class="form-label">Quantity:</label>
+                                <input type="number" class="form-control" id="editQuantity" name="quantity" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editRunning" class="form-label">Running Count:</label>
+                                <input type="number" class="form-control" id="editRunning" name="running" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDamage" class="form-label">Damage Count:</label>
+                                <input type="number" class="form-control" id="editDamage" name="damage" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editComments" class="form-label">Comments:</label>
+                                <textarea class="form-control" id="editComments" name="comments"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
         
         <div class="table-responsive mt-4">
-            <table class="table table-warning">
-                <thead>
+            <table class="table table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <th>Lab Name</th>
-                        <th>Actions</th>
+                        <th>#</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Running</th>
+                        <th>Damaged</th>
+                        <th>Comments</th>
+                        <th colspan="3">Actions</th>
                     </tr>
                 </thead>
-                <tbody id="taskList">
-                    <!-- Tasks will be rendered here -->
+                <tbody id="componentsTableBody">
+                    <!-- Components will be rendered here -->
                 </tbody>
             </table>
         </div>
     </div>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
