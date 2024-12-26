@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Lab Components</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center text-light">Components of Lab</h1>
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Create New Component
+            </button>
+            <a href="labs.html" class="btn btn-secondary">Back to Labs</a>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Component</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="componentForm">
+                            <div class="mb-3">
+                                <label for="typeInput" class="form-label">Type</label>
+                                <input type="text" class="form-control" id="typeInput" aria-label="Text input" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantityInput" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="quantityInput" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="commentsInput" class="form-label">Comments</label>
+                                <input type="text" class="form-control" id="commentsInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="runningInput" class="form-label">Running</label>
+                                <input type="number" class="form-control" id="runningInput" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="damageInput" class="form-label">Damage</label>
+                                <input type="number" class="form-control" id="damageInput" min="0" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="createComponentBtn">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Component</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="componentForm" method="post" onsubmit="return false;">
+                            <div class="mb-3">
+                                <label for="typeInput" class="form-label">Type</label>
+                                <input type="text" class="form-control" id="typeInput" aria-label="Component type input" required>
+                            </div>
+                            <!-- Other form fields... -->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" form="componentForm" class="btn btn-primary" id="createComponentBtn">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-warning">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-primary">Number</th>
+                        <th scope="col" class="text-primary">Type</th>
+                        <th scope="col" class="text-primary">Quantity</th>
+                        <th scope="col" class="text-primary">Running</th>
+                        <th scope="col" class="text-primary">Damage</th>
+                        <th scope="col" class="text-primary">Comments</th>
+                        <th scope="col" class="text-primary">Add Comments</th>
+                        <th scope="col" class="text-primary">Edit</th>
+                        <th scope="col" class="text-primary">Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="componentsTableBody">
+                    <!-- Components will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize Bootstrap modals
+        document.addEventListener('DOMContentLoaded', () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => new bootstrap.Modal(modal));
+        });
+    </script>
+</body>
+</html>
