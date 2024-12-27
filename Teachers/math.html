@@ -3,132 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="/Teachers/style.css">
+    <meta name="description" content="Educational Resources Dashboard">
+    <title>Educational Resources Dashboard</title>
+    <!-- Use specific version numbers for CDN links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="main">
-        <div class="row">
-            <h3 class="text-light">The first term :</h3>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">The question bank unit 3</h5>
-                        <p class="card-text">Send in last week in the first month</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+        <div class="container">
+            <section class="term-section" id="first-term">
+                <h2 class="term-title">First Term Resources</h2>
+                <div class="row">
+                    <!-- Question Bank Unit 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Student book</h5>
+                                <p class="card-text">Due: Beginning of the term </p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">question bank answers</h5>
-                        <p class="card-text">send after question bank 1</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Powerpoint</h5>
+                                <p class="card-text">Hint: only for teachers</p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">The question bank unit 2</h5>
-                        <p class="card-text">Send in last week in the second month</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Question Bank - Unit 3</h5>
+                                <p class="card-text">Due: Last week of first month</p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">question bank answers</h5>
-                        <p class="card-text">send after question bank 2</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Question Bank - Unit 4</h5>
+                                <p class="card-text">Due: Last week of second month</p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
+       
                 </div>
-            </div>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">student book</h5>
-                        <p class="card-text">send to student before first section</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+            </section>
+
+            <section class="term-section" id="second-term">
+                <h2 class="term-title">Second Term Resources</h2>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Student book</h5>
+                                <p class="card-text">Due: Beginning of the term </p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">PowerPoint</h5>
-                        <p class="card-text">don't send to student</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Powerpoint</h5>
+                                <p class="card-text">Hint: only for teachers</p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <hr>
-            <h3 class="text-light">The second term :</h3>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">The question bank unit 3</h5>
-                        <p class="card-text">Send in last week in the third month</p>
-                        <a href="#" class="btn btn btn-dark"><i class="fa fa-download"></i> download</a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Question Bank - Unit 5</h5>
+                                <p class="card-text">Due: Last week of first month</p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">question bank answers</h5>
-                        <p class="card-text">send after question bank 3</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card student-only">
+                            <div class="card-body">
+                                <h5 class="card-title">Question Bank - Unit 6</h5>
+                                <p class="card-text">Due: Last week of second month</p>
+                                <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
+       
                 </div>
-            </div>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">The question bank unit 4</h5>
-                        <p class="card-text">Send in last week in the forth month</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
-                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">question bank answers</h5>
-                        <p class="card-text">send after question bank 4</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">student book</h5>
-                        <p class="card-text">send to student before first section</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">PowerPoint</h5>
-                        <p class="card-text">don't send to student</p>
-                        <a href="#" class="btn btn-dark"><i class="fa fa-download"></i> download</a>
-                    </div>
-                </div>
-            </div>
-            
-            <hr>
-            
-    
-    
+            </section>
         </div>
     </div>
 
+    <script src="js/script.js">
+        // Add basic functionality for download handling
+       
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

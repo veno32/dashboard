@@ -1,3 +1,92 @@
-.w{
+:root {
+    --primary-bg: #1a1a1a;
+    --card-hover-bg: #f8f9fa;
+    --spacing-unit: 1rem;
+}
+
+body {
+    background-color: var(--primary-bg);
+    padding: var(--spacing-unit);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-unit);
+}
+
+.term-section {
+    margin-bottom: 2rem;
+}
+
+.term-title {
+    color: #fff;
+    margin: 1.5rem 0;
+    font-weight: 600;
+    border-bottom: 2px solid #ffffff33;
+    padding-bottom: 0.5rem;
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: var(--spacing-unit);
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: var(--card-hover-bg);
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.btn-download {
+    background-color: #2c3e50;
     color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-download:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+.student-only {
+    border-left: 4px solid #2ecc71;
+}
+
+.teacher-only {
+    border-left: 4px solid #e74c3c;
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 0.5rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
 }
