@@ -12,17 +12,18 @@
     <div class="container mt-5">
         <h1 class="text-center text-light">Components of Lab</h1>
         <div class="d-flex justify-content-between align-items-center my-4">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                 Create New Component
             </button>
             <a href="labs.html" class="btn btn-secondary">Back to Labs</a>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Create Component Modal -->
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Component</h1>
+                        <h1 class="modal-title fs-5" id="createModalLabel">New Component</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -56,32 +57,49 @@
                 </div>
             </div>
         </div>
-        
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Edit Component Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Component</h1>
+                        <h1 class="modal-title fs-5" id="editModalLabel">Edit Component</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="componentForm" method="post" onsubmit="return false;">
+                        <form id="editForm">
+                            <input type="hidden" id="editComponentId">
                             <div class="mb-3">
-                                <label for="typeInput" class="form-label">Type</label>
-                                <input type="text" class="form-control" id="typeInput" aria-label="Component type input" required>
+                                <label for="editTypeInput" class="form-label">Type</label>
+                                <input type="text" class="form-control" id="editTypeInput" required>
                             </div>
-                            <!-- Other form fields... -->
+                            <div class="mb-3">
+                                <label for="editQuantityInput" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="editQuantityInput" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editCommentsInput" class="form-label">Comments</label>
+                                <input type="text" class="form-control" id="editCommentsInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editRunningInput" class="form-label">Running</label>
+                                <input type="number" class="form-control" id="editRunningInput" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDamageInput" class="form-label">Damage</label>
+                                <input type="number" class="form-control" id="editDamageInput" min="0" required>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" form="componentForm" class="btn btn-primary" id="createComponentBtn">Create</button>
+                        <button type="button" class="btn btn-primary" id="saveEditBtn">Save Changes</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Components Table -->
         <div class="table-responsive">
             <table class="table table-warning">
                 <thead>
@@ -105,13 +123,6 @@
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        // Initialize Bootstrap modals
-        document.addEventListener('DOMContentLoaded', () => {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => new bootstrap.Modal(modal));
-        });
-    </script>
+    <script src="js/view.js"></script>
 </body>
 </html>

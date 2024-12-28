@@ -15,13 +15,13 @@ body {
   font-family: -apple-system, system-ui, sans-serif;
   display: flex;
   min-height: 100vh;
-  background: var(--content-bg);
+  background: linear-gradient(45deg,black 10%,white 350%);
 }
 
 /* Navigation Styles */
 .nav__cont {
   width: 60px;
-  background: var(--nav-bg);
+  background:linear-gradient(45deg,black 10%,white 350%);
   position: fixed;
   top: 0;
   left: 0;
@@ -38,10 +38,16 @@ body {
   padding-top: 20px;
   list-style: none;
 }
-
+.nav{
+  padding: 15px;
+  padding-top: 20px;
+  
+  margin: 5px;
+}
 .nav__items {
   padding: 15px;
-  padding-top: 40px;
+  padding-top: 20px;
+  padding-right: 100px;
   margin: 10px;
   border-radius: 8px;
   transition: background 0.3s;
