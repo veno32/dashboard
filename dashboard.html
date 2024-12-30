@@ -1,118 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    
 </head>
 <body>
-    <!-- SVG Definitions -->
-    <svg style="display:none;">
-        <defs>
-            <g id="labs2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pc" viewBox="0 0 16 16">
-                    <path d="M5 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm.5 14a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1M5 1.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5M5.5 3h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1"/>
-                </svg>
-            </g>
-            <g id="finger2">
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fingerprint" viewBox="0 0 16 16">
-                    <path d="M8.06 6.5a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V7a.5.5 0 0 1 .5-.5Z"/>
-                    <path d="M6.06 7a2 2 0 1 1 4 0 .5.5 0 1 1-1 0 1 1 0 1 0-2 0v.332q0 .613-.066 1.221A.5.5 0 0 1 6 8.447q.06-.555.06-1.115zm3.509 1a.5.5 0 0 1 .487.513 11.5 11.5 0 0 1-.587 3.339l-1.266 3.8a.5.5 0 0 1-.949-.317l1.267-3.8a10.5 10.5 0 0 0 .535-3.048A.5.5 0 0 1 9.569 8m-3.356 2.115a.5.5 0 0 1 .33.626L5.24 14.939a.5.5 0 1 1-.955-.296l1.303-4.199a.5.5 0 0 1 .625-.329"/>
-                    <path d="M4.759 5.833A3.501 3.501 0 0 1 11.559 7a.5.5 0 0 1-1 0 2.5 2.5 0 0 0-4.857-.833.5.5 0 1 1-.943-.334m.3 1.67a.5.5 0 0 1 .449.546 10.7 10.7 0 0 1-.4 2.031l-1.222 4.072a.5.5 0 1 1-.958-.287L4.15 9.793a9.7 9.7 0 0 0 .363-1.842.5.5 0 0 1 .546-.449Zm6 .647a.5.5 0 0 1 .5.5c0 1.28-.213 2.552-.632 3.762l-1.09 3.145a.5.5 0 0 1-.944-.327l1.089-3.145c.382-1.105.578-2.266.578-3.435a.5.5 0 0 1 .5-.5Z"/>
-                    <path d="M3.902 4.222a5 5 0 0 1 5.202-2.113.5.5 0 0 1-.208.979 4 4 0 0 0-4.163 1.69.5.5 0 0 1-.831-.556m6.72-.955a.5.5 0 0 1 .705-.052A4.99 4.99 0 0 1 13.059 7v1.5a.5.5 0 1 1-1 0V7a3.99 3.99 0 0 0-1.386-3.028.5.5 0 0 1-.051-.705M3.68 5.842a.5.5 0 0 1 .422.568q-.044.289-.044.59c0 .71-.1 1.417-.298 2.1l-1.14 3.923a.5.5 0 1 1-.96-.279L2.8 8.821A6.5 6.5 0 0 0 3.058 7q0-.375.054-.736a.5.5 0 0 1 .568-.422m8.882 3.66a.5.5 0 0 1 .456.54c-.084 1-.298 1.986-.64 2.934l-.744 2.068a.5.5 0 0 1-.941-.338l.745-2.07a10.5 10.5 0 0 0 .584-2.678.5.5 0 0 1 .54-.456"/>
-                    <path d="M4.81 1.37A6.5 6.5 0 0 1 14.56 7a.5.5 0 1 1-1 0 5.5 5.5 0 0 0-8.25-4.765.5.5 0 0 1-.5-.865m-.89 1.257a.5.5 0 0 1 .04.706A5.48 5.48 0 0 0 2.56 7a.5.5 0 0 1-1 0c0-1.664.626-3.184 1.655-4.333a.5.5 0 0 1 .706-.04ZM1.915 8.02a.5.5 0 0 1 .346.616l-.779 2.767a.5.5 0 1 1-.962-.27l.778-2.767a.5.5 0 0 1 .617-.346m12.15.481a.5.5 0 0 1 .49.51c-.03 1.499-.161 3.025-.727 4.533l-.07.187a.5.5 0 0 1-.936-.351l.07-.187c.506-1.35.634-2.74.663-4.202a.5.5 0 0 1 .51-.49"/>
-                </svg>
-            </g>
-            <g id="teach2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 640 512">
-                    <path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384V352l16 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V192h56 64 16c17.7 0 32-14.3 32-32s-14.3-32-32-32h-16V64h192v192H384v-32h-64v48c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V32c0-26.5-21.5-48-48-48H368c-26.5 0-48 21.5-48 48v80h-77h-66c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9V480c0 17.7 14.3 32 32 32s32-14.3 32-32z"/>
-                </svg>
-            </g>
-            <g id="face2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                </svg>
-            </g>
-        </defs>
-    </svg>
-
-    <!-- Sidebar Navigation -->
-    <nav class="nav__cont">
-        <ul class="nav_w">
-            <li class="nav">
-                <svg width="30" height="30" x="80.0729" y="254.932" version="1.1" preserveAspectRatio="none" viewBox="92.1099853515625 49.80998229980469 662.4500122070312 747.0299682617188">
-                    <g transform="matrix(1 0 0 1 0 0)" class="icon1" style="fill:white;">
-                        <defs></defs>
-                        <g>
-                            <path class="fil0" d="M754.56 381.7l-305.94 -331.89 0 220.86 164.84 171.27 0 170.3 -13.92 12.21 116.18 102.61 38.84 -35.56 0 -309.8zm-356.51 -331.89l-305.94 331.89 0 309.8 38.84 35.57 116.18 -102.62 -13.92 -12.21 0 -170.3 164.84 -171.27 0 -220.86zm-229.73 711.47l38.84 35.56 432.34 0 38.86 -35.56 -117.01 -103.33 -13.93 12.22 -248.17 0 -13.93 -12.22 -117 103.33z"></path>
+  <div class="controls">
+  </div>
+  <div class="layout-container">
+        <div class="fixed-side">
+           <div class="text">
+           
+                <div class="logo">
+                    <svg width="50" height="50" x="80.0729" y="254.932" version="1.1" preserveAspectRatio="none" viewBox="92.1099853515625 49.80998229980469 662.4500122070312 747.0299682617188">
+                        <g transform="matrix(1 0 0 1 0 0)" class="icon1" style="fill:white;">
+                            <defs></defs>
+                            <g>
+                                <path class="fil0" d="M754.56 381.7l-305.94 -331.89 0 220.86 164.84 171.27 0 170.3 -13.92 12.21 116.18 102.61 38.84 -35.56 0 -309.8zm-356.51 -331.89l-305.94 331.89 0 309.8 38.84 35.57 116.18 -102.62 -13.92 -12.21 0 -170.3 164.84 -171.27 0 -220.86zm-229.73 711.47l38.84 35.56 432.34 0 38.86 -35.56 -117.01 -103.33 -13.93 12.22 -248.17 0 -13.93 -12.22 -117 103.33z"></path>
+                            </g>
                         </g>
-                    </g>
-                </svg>
-            </li>
-            <li class="nav__items">
-                <a href="#" id="labs">
-                    <svg viewBox="0 0 16 16">
-                        <use xlink:href="#labs2"></use>
                     </svg>
-                    <span>Labs</span>
-                </a>
-            </li>
-            <li class="nav__items">
-                <a href="#" id="finger">
-                    <svg viewBox="0 0 16 16">
-                        <use xlink:href="#finger2"></use>
-                    </svg>
-                    <span>Fingerprint</span>
-                </a>
-            </li>
-            <li class="nav__items">
-                <a href="#" id="teach">
-                    <svg viewBox="0 0 16 16">
-                        <use xlink:href="#teach2"></use>
-                    </svg>
-                    <span>Teachers</span>
-                </a>
-            </li>
-            <li class="nav__items">
-                <a href="#" id="face">
-                    <svg viewBox="0 0 16 16">
-                        <use xlink:href="#face2"></use>
-                    </svg>
-                    <span>Face expressions</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div class="wrapper" id="content">
-        <main>
-            <h1>NG school</h1>
-            <h2>Dashboard Overview</h2>
+                    <h4 class="text-light ">NG school</h4>
+                </div>
+               
 
-            <div class="dashboard-content">
-                <div class="info-card">
-                    <h3>Total Students</h3>
-                    <p>1,234 +</p>
+                <button class="btn" onclick="handleLayerClick('layer4')">labs</button>
+                <button class="btn" onclick="handleLayerClick('layer3')">Teachers</button>
+                <button class="btn" onclick="handleLayerClick('layer2')">Fingerprint</button>
+            </div>
+        </div>
+   
+    <div class="dynamic-container">
+        
+        <!-- layer2 -->
+
+      <div id="layer2" class="layer" onclick="handleLayerClick('layer2')">  
+         <iframe 
+        src="https://docs.google.com/spreadsheets/d/1FZf8t0M7-qYk1cT1_ryWcd4m_Jq5bPSKbLQvgummqsE/edit?usp=sharing" 
+        width="100%" 
+        height="550px" 
+        class="frame"
+        frameborder="0">
+    </iframe>
+</div>
+        <!-- layer 3 -->
+
+      <div id="layer3" class="layer" onclick="handleLayerClick('layer3')">
+        <div class="main">
+            <div class="container">
+                <section class="term-section" id="first-term">
+                    <h2 class="term-title">First Term Resources</h2>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+                                            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                                          </svg>
+                                        Student book
+                                    </h5>
+                                    <p class="card-text">Due: Beginning of the term </p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-ppt-fill" viewBox="0 0 16 16">
+                                            <path d="M8.188 10H7V6.5h1.188a1.75 1.75 0 1 1 0 3.5"/>
+                                            <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM7 5.5a1 1 0 0 0-1 1V13a.5.5 0 0 0 1 0v-2h1.188a2.75 2.75 0 0 0 0-5.5z"/>
+                                          </svg>
+                                        Powerpoint
+                                    </h5>
+                                    <p class="card-text">Hint: only for teachers</p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927"/>
+                                          </svg>
+                                        Question Bank - Unit 3
+                                    </h5>
+                                    <p class="card-text">Due: Last week of first month</p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927"/>
+                                          </svg>
+                                        Question Bank - Unit 4
+                                    </h5>
+                                    <p class="card-text">Due: Last week of second month</p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+           
+                    </div>
+                </section>
+    
+                <section class="term-section" id="second-term">
+                    <h2 class="term-title">Second Term Resources</h2>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+                                            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                                          </svg>
+                                        Student book
+                                    </h5>
+                                    <p class="card-text">Due: Beginning of the term </p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-ppt-fill" viewBox="0 0 16 16">
+                                            <path d="M8.188 10H7V6.5h1.188a1.75 1.75 0 1 1 0 3.5"/>
+                                            <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM7 5.5a1 1 0 0 0-1 1V13a.5.5 0 0 0 1 0v-2h1.188a2.75 2.75 0 0 0 0-5.5z"/>
+                                          </svg>
+                                        Powerpoint
+                                    </h5>
+                                    <p class="card-text">Hint: only for teachers</p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927"/>
+                                          </svg>
+                                        Question Bank - Unit 5
+                                    </h5>
+                                    <p class="card-text">Due: Last week of first month</p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card student-only">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927"/>
+                                          </svg>
+                                        Question Bank - Unit 6
+                                    </h5>
+                                    <p class="card-text">Due: Last week of second month</p>
+                                    <button class="btn btn-download" onclick="downloadResource('qb-unit3')">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+           
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- layer 4 -->
+
+        <div id="layer4" class="layer" onclick="handleLayerClick('layer4')">
+            <div class="container mt-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Create New Lab
+                </button>
+     
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">New Lab</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="taskInput" class="form-label">Lab Name:</label>
+                                    <input type="text" class="form-control" id="taskInput" placeholder="Enter lab name">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="createTask()" data-bs-dismiss="modal">Create</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-card">
-                    <h3>Total Teachers</h3>
-                    <p>87 +</p>
-                </div>
-                <div class="info-card">
-                    <h3>Active Classes</h3>
-                    <p>45 +</p>
-                </div>
-                <div class="info-card">
-                    <h3>Attendance Rate</h3>
-                    <p>95% +</p>
+                
+                <div class="table-responsive mt-4">
+                    <table class="table table-warning">
+                        <thead>
+                            <tr>
+                                <th>Lab Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskList">
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </main>
+      </div>
+      
+    
     </div>
+    </div>
+    
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
-
-<script src="js/script.js"></script>
 </html>

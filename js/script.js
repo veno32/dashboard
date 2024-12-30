@@ -1,45 +1,100 @@
-const labs = document.getElementById('labs');
-const teachers = document.getElementById('teach');
-const fingerprint = document.getElementById('finger');
-const face = document.getElementById('face');
+function handleLayerClick(clickedLayerId) {
+    const layers = document.querySelectorAll('.layer');
+    const clickedLayer = document.getElementById(clickedLayerId);
+    layers.forEach(layer => {
+      layer.classList.remove('active');
+    });
 
-const pages = {
-    labs: 'labs/labs.html',
-    teachers: 'Teachers/IT.html',
-    fingerprint: 'fingerprint/fingerprint.html',
-    face: 'face/face.html'  // Added missing page
-};
-
-async function loadPage(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const html = await response.text();
-        document.getElementById('content').innerHTML = html;
-    } catch (error) {
-        console.error('Error loading page:', error);
-        document.getElementById('content').innerHTML = `
-            <div class="error-message">
-                <h2>Error loading page</h2>
-                <p>Please try again. Error: ${error.message}</p>
-            </div>`;
+    if (!clickedLayer.classList.contains('active')) {
+      clickedLayer.classList.add('active');
     }
+  }
+
+  function downloadResource(resourceId) {
+  if (!resourceId) {
+      console.error('Invalid resource ID');
+      return;
+  }
+  const button = event.currentTarget;
+  const originalText = button.innerHTML;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+  button.disabled = true;
+
+  setTimeout(() => {
+      button.innerHTML = originalText;
+      button.disabled = false;
+      alert('Download started for: ' + resourceId);
+  }, 1000);
 }
 
-// Fixed event listeners without spaces
-labs.addEventListener('click', () => loadPage(pages.labs));
-fingerprint.addEventListener('click', () => loadPage(pages.fingerprint));
-teachers.addEventListener('click', () => loadPage(pages.teachers));
-face.addEventListener('click', () => loadPage(pages.face));
+document.addEventListener('error', function(e) {
+  if (e.target.tagName.toLowerCase() === 'link' || e.target.tagName.toLowerCase() === 'script') {
+      console.error('Failed to load resource:', e.target.src || e.target.href);
+  }
+}, true);
 
-// Add error handling for missing elements
-document.addEventListener('DOMContentLoaded', () => {
-    const navElements = { labs, teachers, fingerprint, face };
-    for (const [key, element] of Object.entries(navElements)) {
-        if (!element) {
-            console.error(`Navigation element '${key}' not found in the DOM`);
-        }
-    }
-});
+
+let tasks = [];
+function loadTasks() {
+  const savedTasks = localStorage.getItem('labTasks');
+  if (savedTasks) {
+      tasks = JSON.parse(savedTasks);
+      renderTasks();
+  }
+}
+
+function saveTasks() {
+  localStorage.setItem('labTasks', JSON.stringify(tasks));
+}
+
+function createTask() {
+  const taskInput = document.getElementById('taskInput');
+  const task = taskInput.value.trim();
+  
+  if (task) {
+      tasks.push({ id: Date.now(), name: task });
+      taskInput.value = '';
+      saveTasks();  
+      renderTasks();
+  }
+}
+
+function renderTasks() {
+  const taskList = document.getElementById('taskList');
+  taskList.innerHTML = ''; 
+
+  tasks.forEach(task => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+          <td>${task.name}</td>
+          <td>
+              <a href="view.html"?id=${task.id}" class="btn btn-info btn-sm">View</a>
+              <button onclick="editTask(${task.id})" class="btn btn-warning btn-sm">Edit</button>
+              <button onclick="deleteTask(${task.id})" class="btn btn-danger btn-sm">Delete</button>
+          </td>`;
+      taskList.appendChild(tr);
+  });
+}
+function editTask(id) {
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+
+  const newTaskName = prompt("Enter the new lab name:", task.name);
+  if (newTaskName && newTaskName.trim()) {
+      tasks = tasks.map(task => 
+          task.id === id ? { ...task, name: newTaskName.trim() } : task
+      );
+      saveTasks(); 
+      renderTasks();
+  }
+}
+
+function deleteTask(id) {
+  if (confirm('Are you sure you want to delete this lab?')) {
+      tasks = tasks.filter(task => task.id !== id);
+      saveTasks(); 
+      renderTasks();
+  }
+}
+
+loadTasks();
