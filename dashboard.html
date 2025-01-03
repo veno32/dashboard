@@ -13,14 +13,16 @@
            <div class="text">
            
                 <div class="logo">
-                    <svg width="50" height="50" x="80.0729" y="254.932" version="1.1" preserveAspectRatio="none" viewBox="92.1099853515625 49.80998229980469 662.4500122070312 747.0299682617188">
-                        <g transform="matrix(1 0 0 1 0 0)" class="icon1" style="fill:white;">
-                            <defs></defs>
-                            <g>
-                                <path class="fil0" d="M754.56 381.7l-305.94 -331.89 0 220.86 164.84 171.27 0 170.3 -13.92 12.21 116.18 102.61 38.84 -35.56 0 -309.8zm-356.51 -331.89l-305.94 331.89 0 309.8 38.84 35.57 116.18 -102.62 -13.92 -12.21 0 -170.3 164.84 -171.27 0 -220.86zm-229.73 711.47l38.84 35.56 432.34 0 38.86 -35.56 -117.01 -103.33 -13.93 12.22 -248.17 0 -13.93 -12.22 -117 103.33z"></path>
+                    <button class="logo-button" onclick="handleLayerClick('layer1')">
+                        <svg width="50" height="50" x="80.0729" y="254.932" version="1.1" preserveAspectRatio="none" viewBox="92.1099853515625 49.80998229980469 662.4500122070312 747.0299682617188">
+                            <g transform="matrix(1 0 0 1 0 0)" class="icon1" style="fill:white;">
+                                <defs></defs>
+                                <g>
+                                    <path class="fil0" d="M754.56 381.7l-305.94 -331.89 0 220.86 164.84 171.27 0 170.3 -13.92 12.21 116.18 102.61 38.84 -35.56 0 -309.8zm-356.51 -331.89l-305.94 331.89 0 309.8 38.84 35.57 116.18 -102.62 -13.92 -12.21 0 -170.3 164.84 -171.27 0 -220.86zm-229.73 711.47l38.84 35.56 432.34 0 38.86 -35.56 -117.01 -103.33 -13.93 12.22 -248.17 0 -13.93 -12.22 -117 103.33z"></path>
+                                </g>
                             </g>
-                        </g>
-                    </svg>
+                        </svg>
+                    </button>
                     <h4 class="text-light ">NG school</h4>
                 </div>
                
@@ -32,9 +34,33 @@
         </div>
    
     <div class="dynamic-container">
-        
+        <div class="layer active" id="layer1" onclick="handleLayerClick('layer1')">
+            <div class="wrapper" id="content">
+                <main>
+                    <h1 class="text">NG school</h1>
+                    <h2 class="text">Dashboard Overview</h2>
+                    <div class="dashboard-content">
+                        <div class="Overview-card text">
+                            <h3>Total Students</h3>
+                            <p>1,234 +</p>
+                        </div>
+                        <div class="Overview-card text">
+                            <h3>Total Teachers</h3>
+                            <p>87 +</p>
+                        </div>
+                        <div class="Overview-card text">
+                            <h3>Active Classes</h3>
+                            <p>45 +</p>
+                        </div>
+                        <div class="Overview-card text">
+                            <h3>Attendance Rate</h3>
+                            <p>95% +</p>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>     
         <!-- layer2 -->
-
       <div id="layer2" class="layer" onclick="handleLayerClick('layer2')">  
          <iframe 
         src="https://docs.google.com/spreadsheets/d/1FZf8t0M7-qYk1cT1_ryWcd4m_Jq5bPSKbLQvgummqsE/edit?usp=sharing" 

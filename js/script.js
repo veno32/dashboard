@@ -26,7 +26,6 @@ function handleLayerClick(clickedLayerId) {
       alert('Download started for: ' + resourceId);
   }, 1000);
 }
-
 document.addEventListener('error', function(e) {
   if (e.target.tagName.toLowerCase() === 'link' || e.target.tagName.toLowerCase() === 'script') {
       console.error('Failed to load resource:', e.target.src || e.target.href);
@@ -42,15 +41,12 @@ function loadTasks() {
       renderTasks();
   }
 }
-
 function saveTasks() {
   localStorage.setItem('labTasks', JSON.stringify(tasks));
 }
-
 function createTask() {
   const taskInput = document.getElementById('taskInput');
   const task = taskInput.value.trim();
-  
   if (task) {
       tasks.push({ id: Date.now(), name: task });
       taskInput.value = '';
@@ -58,7 +54,6 @@ function createTask() {
       renderTasks();
   }
 }
-
 function renderTasks() {
   const taskList = document.getElementById('taskList');
   taskList.innerHTML = ''; 
@@ -88,7 +83,6 @@ function editTask(id) {
       renderTasks();
   }
 }
-
 function deleteTask(id) {
   if (confirm('Are you sure you want to delete this lab?')) {
       tasks = tasks.filter(task => task.id !== id);
@@ -96,5 +90,4 @@ function deleteTask(id) {
       renderTasks();
   }
 }
-
 loadTasks();
