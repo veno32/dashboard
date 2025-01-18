@@ -281,6 +281,21 @@
     </div>
     
   </div>
+  <script>
+    function showLoading(button) {
+    button.classList.add('loading');
+    setTimeout(() => {
+        button.classList.remove('loading');
+    }, 2000); // Remove after 2 seconds
+}
+
+// Example usage in your download function:
+function downloadResource(resourceId) {
+    const button = event.currentTarget;
+    showLoading(button);
+    // Rest of your download logic
+}
+  </script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
 </body>

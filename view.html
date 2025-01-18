@@ -122,6 +122,103 @@
         </div>
     </div>
 
+
+
+    <div class="container mt-5">
+        <h1 class="text-center text-light">Lab PCs</h1>
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPcModal">
+                Create New PC
+            </button>
+        </div>
+    
+        <!-- Create PC Modal -->
+        <div class="modal fade" id="createPcModal" tabindex="-1" aria-labelledby="createPcModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="createPcModalLabel">New PC</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="pcForm">
+                            <div class="mb-3">
+                                <label for="pcNameInput" class="form-label">Name of PC</label>
+                                <input type="text" class="form-control" id="pcNameInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pcIpInput" class="form-label">IP Address</label>
+                                <input type="text" class="form-control" id="pcIpInput" required 
+                                       placeholder="e.g., 192.168.1.1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="pcCommentsInput" class="form-label">Comments</label>
+                                <input type="text" class="form-control" id="pcCommentsInput">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="createPcBtn">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Edit PC Modal -->
+        <div class="modal fade" id="editPcModal" tabindex="-1" aria-labelledby="editPcModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editPcModalLabel">Edit PC</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editPcForm">
+                            <input type="hidden" id="editPcId">
+                            <div class="mb-3">
+                                <label for="editPcNameInput" class="form-label">Name of PC</label>
+                                <input type="text" class="form-control" id="editPcNameInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPcIpInput" class="form-label">IP Address</label>
+                                <input type="text" class="form-control" id="editPcIpInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPcCommentsInput" class="form-label">Comments</label>
+                                <input type="text" class="form-control" id="editPcCommentsInput">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="savePcEditBtn">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- PCs Table -->
+        <div class="table-responsive">
+            <table class="table table-warning">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-primary">Number</th>
+                        <th scope="col" class="text-primary">Name of PC</th>
+                        <th scope="col" class="text-primary">IP Address</th>
+                        <th scope="col" class="text-primary">Connection Status</th>
+                        <th scope="col" class="text-primary">Connect</th>
+                        <th scope="col" class="text-primary">Edit</th>
+                        <th scope="col" class="text-primary">Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="pcsTableBody">
+                    <!-- PCs will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/view.js"></script>
 </body>
